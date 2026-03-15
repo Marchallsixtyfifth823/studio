@@ -1,0 +1,18 @@
+export type TopoSettings = {
+  seed: number
+  contourLevels: number
+  noiseScale: number
+  octaves: number
+  falloff: number
+  strokeWeight: number
+  wobble: number
+  roughness: number
+  smoothing: number
+  bgColor: string
+  colorMode: 'single' | 'elevation' | 'palette'
+  lineColor: string
+  palette: string
+  opacity: number
+  grain: number
+  margin: number
+};
