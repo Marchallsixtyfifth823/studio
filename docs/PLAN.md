@@ -499,14 +499,14 @@ export const tools: ToolDefinition[] = [
 
 ## Implementation Phases
 
-**Current phase: 6**
+**Current phase: 7**
 
 - [x] **Phase 1: Scaffold + App Shell** — Vite + React 19 + TS strict + Tailwind v4 + shadcn. Three-column layout (ToolSwitcher / CanvasArea / Sidebar). 9 lazy-loaded routes with localStorage redirect. Dithered squircle icons per tool with color palettes. Dark theme. Done.
 - [x] **Phase 2: Shared Controls** — 6 shadcn/ui primitives (button, slider, select, popover, collapsible, switch) + 8 control components (section, slider-control, select-control, color-control, switch-control, button-row, gradient-editor, palette-editor). PaletteColor type added. Topo wired with demo controls for visual verification. Done.
 - [x] **Phase 3: Hooks + Lib Utilities** — Removed `@types/p5` (conflicts with p5 v2 native types). Created `useSettings` (localStorage with 200ms debounced writes), `useP5` (instance mode lifecycle with settingsRef sync and static/animated modes), `useThree` (renderer/scene/camera setup with ResizeObserver). Lib utilities: `math.ts` (seededRandom, mapRange, constrain, randomInt), `color.ts` (hexToRgb, rgbToHex, lerpColor, getColorAtPosition, randomHexColor), `texture.ts` (applyGrain, applyCanvasTexture), `export.ts` (generateFilename, exportPNG, exportSVG, createRecorder). 23 tests passing. Done.
 - [x] **Phase 4: Port Topo** — First complete tool. Validates entire architecture. Ported all 924 lines to p5 v2 instance mode. Key discoveries: `curveVertex` renamed to `splineVertex` in p5 v2; p5 v2 constructor is async (uses rAF), requiring `hitCriticalError` flag in `useP5` cleanup for StrictMode; tool settings types must use `type` not `interface` for `useSettings` compatibility; `connectSegments` needed spatial hash (O(n) vs O(n²)); terrain computation cached separately from rendering for slider responsiveness; grain uses canvas 2D `getImageData` at `pixelDensity()`-scaled dimensions for performance. Done.
 - [x] **Phase 5: Port Blocks** — Adds palette system with 5 color pickers, canvas size switching. Key discoveries: `pixelDensity(1)` essential for tools with per-pixel effects (texture/grain/halftone) — blocks are flat geometric shapes that don't benefit from retina; pre-computed noise lookup table at half resolution avoids expensive per-pixel `p.noise()` calls; `seededRandom` from `lib/math.ts` (not `p.randomSeed`/`p.random`) for deterministic layout and color assignment; geometry cached separately from color assignment for slider responsiveness. Done.
-- [ ] **Phase 6: Port Organic** — First use of GradientEditor, dynamic algorithm-specific controls.
+- [x] **Phase 6: Port Organic** — First use of GradientEditor, dynamic algorithm-specific controls. 3 path types (flowField/wandering/waves) with per-algorithm settings sections. 10 palette presets + custom gradient via ColorStop editor. Organic effects (wobble/roughness/taper), texture and grain post-processing. Path generation cached separately from rendering for slider responsiveness. Done.
 - [ ] **Phase 7: Port Dither** — Different process: Canvas 2D, no p5. Port core engine to TypeScript. PaletteEditor.
 - [ ] **Phase 8: Port Gradients** — Animation toggle (noLoop ↔ loop). MP4 video recording.
 - [ ] **Phase 9: Port Plotter** — Large conditional controls based on patternType and brushType.

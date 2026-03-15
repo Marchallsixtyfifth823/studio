@@ -86,6 +86,7 @@ All p5 tools use instance mode. Every p5 global must be prefixed with `p.` (e.g.
 - Constructor is async (uses `requestAnimationFrame`) — `useP5` handles StrictMode cleanup via `hitCriticalError`
 - When using canvas 2D API directly (e.g. `getImageData`), multiply dimensions by `p.pixelDensity()`
 - Cache expensive computations (elevation fields, contour extraction) and only recompute when the inputs that affect them change — visual-only settings should skip recomputation
+- **Performance in hot rendering loops:** For tools that draw many line segments (organic, lines, gradients), use direct canvas 2D API (`ctx.strokeStyle`, `ctx.lineWidth`, `ctx.beginPath/moveTo/lineTo/stroke`) instead of `p.stroke()`, `p.strokeWeight()`, `p.line()`. p5 methods have significant per-call overhead. Pre-parse color stops (hex→RGB) once per frame, not per segment. Use `rgb(r,g,b)` strings instead of `p5.Color` objects to avoid allocation in tight loops.
 
 ## Testing
 
