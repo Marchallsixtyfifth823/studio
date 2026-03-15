@@ -156,7 +156,6 @@ studio/
 │       ├── dither/
 │       │   ├── index.tsx
 │       │   ├── engine.ts
-│       │   ├── patterns.ts
 │       │   ├── svg.ts
 │       │   └── types.ts
 │       ├── gradients/
@@ -397,11 +396,10 @@ export const tools: ToolDefinition[] = [
 
 **Sections:** Source, Pattern, Parameters, Palette (with presets), Export (SVG + PNG)
 
-**Files to port:**
-- `core/dither.js` + `core/bayer.js` + `core/gradient.js` → `engine.ts`
-- `core/patterns.js` → `patterns.ts`
+**Files ported:**
+- `core/dither.js` + `core/bayer.js` + `core/gradient.js` + `core/patterns.js` → `engine.ts`
 - `core/svg.js` → `svg.ts`
-- `web/app.js` → `index.tsx` (rewrite as React)
+- `web/app.js` → `index.tsx` (rewritten as React)
 
 ---
 
@@ -507,7 +505,7 @@ export const tools: ToolDefinition[] = [
 - [x] **Phase 4: Port Topo** — First complete tool. Validates entire architecture. Ported all 924 lines to p5 v2 instance mode. Key discoveries: `curveVertex` renamed to `splineVertex` in p5 v2; p5 v2 constructor is async (uses rAF), requiring `hitCriticalError` flag in `useP5` cleanup for StrictMode; tool settings types must use `type` not `interface` for `useSettings` compatibility; `connectSegments` needed spatial hash (O(n) vs O(n²)); terrain computation cached separately from rendering for slider responsiveness; grain uses canvas 2D `getImageData` at `pixelDensity()`-scaled dimensions for performance. Done.
 - [x] **Phase 5: Port Blocks** — Adds palette system with 5 color pickers, canvas size switching. Key discoveries: `pixelDensity(1)` essential for tools with per-pixel effects (texture/grain/halftone) — blocks are flat geometric shapes that don't benefit from retina; pre-computed noise lookup table at half resolution avoids expensive per-pixel `p.noise()` calls; `seededRandom` from `lib/math.ts` (not `p.randomSeed`/`p.random`) for deterministic layout and color assignment; geometry cached separately from color assignment for slider responsiveness. Done.
 - [x] **Phase 6: Port Organic** — First use of GradientEditor, dynamic algorithm-specific controls. 3 path types (flowField/wandering/waves) with per-algorithm settings sections. 10 palette presets + custom gradient via ColorStop editor. Organic effects (wobble/roughness/taper), texture and grain post-processing. Path generation cached separately from rendering for slider responsiveness. Done.
-- [ ] **Phase 7: Port Dither** — Different process: Canvas 2D, no p5. Port core engine to TypeScript. PaletteEditor.
+- [x] **Phase 7: Port Dither** — Canvas 2D (no p5/Three.js). Bayer matrices, pattern thresholds, gradient generation, and dithering core consolidated into `engine.ts`. Compact inline PaletteEditor (swatch + hex + weight slider + %). SVG export via `svg.ts`. Image upload + drag-and-drop. 4 palette presets. Default: Game Boy palette, square shape, 45° linear gradient. Done.
 - [ ] **Phase 8: Port Gradients** — Animation toggle (noLoop ↔ loop). MP4 video recording.
 - [ ] **Phase 9: Port Plotter** — Large conditional controls based on patternType and brushType.
 - [ ] **Phase 10: Port Metal Shader** — Three.js integration. useThree hook. Only 2 settings.
