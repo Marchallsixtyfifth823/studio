@@ -1,15 +1,9 @@
-import { Suspense } from "react"
+import { Suspense, lazy } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
 import { AppShell } from "@/components/app-shell"
 import { tools, pages } from "@/tools/registry"
 
-function getDefaultTool(): string {
-  const stored = localStorage.getItem("studio:last-tool")
-  if (stored && tools.some((t) => t.id === stored)) {
-    return stored
-  }
-  return tools[0].id
-}
+const Home = lazy(() => import("@/tools/home"))
 
 function ToolLoading() {
   return (
@@ -28,6 +22,14 @@ function ToolLoading() {
 export default function App() {
   return (
     <Routes>
+      <Route
+        path="/"
+        element={
+          <Suspense fallback={<ToolLoading />}>
+            <Home />
+          </Suspense>
+        }
+      />
       <Route element={<AppShell />}>
         {[...tools, ...pages].map((tool) => (
           <Route
@@ -40,7 +42,7 @@ export default function App() {
             }
           />
         ))}
-        <Route path="*" element={<Navigate to={`/${getDefaultTool()}`} replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   )
