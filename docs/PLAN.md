@@ -445,7 +445,7 @@ export const tools: ToolDefinition[] = [
 
 **Sections:** Image upload, Character Set, Character Mixing, Size Variation, Color, Rendering, Texture, Sketch, Actions
 
-**Special:** Requires image upload. Largest control surface. Uses imagetracerjs.
+**Special:** Requires image upload. Largest control surface. Blocks sketch style uses flood-fill boundary tracing (no imagetracerjs). ASCII text rendered via canvas 2D API for performance.
 
 ---
 
@@ -475,7 +475,7 @@ export const tools: ToolDefinition[] = [
 
 ## Implementation Phases
 
-**Current phase: 9**
+**Current phase: 10**
 
 - [x] **Phase 1: Scaffold + App Shell** — Vite + React 19 + TS strict + Tailwind v4 + shadcn. Three-column layout (ToolSwitcher / CanvasArea / Sidebar). 9 lazy-loaded routes with localStorage redirect. Dithered squircle icons per tool with color palettes. Dark theme. Done.
 - [x] **Phase 2: Shared Controls** — 6 shadcn/ui primitives (button, slider, select, popover, collapsible, switch) + 8 control components (section, slider-control, select-control, color-control, switch-control, button-row, gradient-editor, palette-editor). PaletteColor type added. Topo wired with demo controls for visual verification. Done.
@@ -486,7 +486,7 @@ export const tools: ToolDefinition[] = [
 - [x] **Phase 7: Port Dither** — Canvas 2D (no p5/Three.js). Bayer matrices, pattern thresholds, gradient generation, and dithering core consolidated into `engine.ts`. Compact inline PaletteEditor (swatch + hex + weight slider + %). SVG export via `svg.ts`. Image upload + drag-and-drop. 4 palette presets. Default: Game Boy palette, square shape, 45° linear gradient. Done.
 - [x] **Phase 8: Port Gradients** — First WEBGL shader tool. Fragment shader ported verbatim (simplex noise, FBM, domain warping, glass waves, gradient interpolation, lighting/fresnel, grain, adjustments). Offscreen `createGraphics(WEBGL)` rendered to 2D main canvas. Animation toggle via internal `wasAnimating` flag (`p.loop()`/`p.noLoop()` switching) without `useP5` animated mode. MP4 recording via `createRecorder` with forced animation. 18 preset palettes + HSL random generation. Cached color stop parsing and container size to avoid per-frame allocations/DOM reads during animation. GradientEditor and PaletteEditor both use react-colorful HexColorPicker popover for consistent color picking across tools. Done.
 - [x] **Phase 9: Port Plotter** — 6 pattern types (dotGrid/flowField/concentric/waves/hatching/geometric) with conditional controls per pattern. 5 brush types (normal/stippled/multiStroke/calligraphic/stamp) with conditional sub-settings. Organic distortion (wobble/roughness/taper). Layer system simplified to flat `colors[]` array with 12 palette presets. Shape controls for dotGrid/geometric, brush controls for path-based patterns. Custom paper texture (fibers + scratches + grain) via canvas 2D API. Noise sliders need `decimals` prop for fractional display. Done.
-- [ ] **Phase 10: Port ASCII** — 4605 lines inline JS extraction. 60+ settings. Image upload.
+- [x] **Phase 10: Port ASCII** — 4605 lines inline JS extraction. 60+ settings (characters, mixing, size variation, rendering, color, overlay, adjustments, texture, sketch overlays). Image upload via button + drag-and-drop. HTMLImageElement + offscreen canvas pixel caching (not p5.Image). 5 sketch overlay styles: hatching, contour (Sobel edge detection + flow tracing), stipple, blocks (flood-fill + boundary tracing + Douglas-Peucker, replacing imagetracerjs dependency), mixed. Character mixing with 4 modes (random/brightness/spatial/hybrid) across 6 character sets. Size variation with 3 modes (detail/texture/focus). Performance: ASCII text rendering via direct canvas 2D API (`ctx.fillText`) instead of `p5.text()`; texture effect downsampled to 1/4 resolution noise grid with bilinear interpolation; pre-computed fillStyle strings; content-based cache keys for size grid. Original image overlay via `ctx.drawImage` + `globalAlpha` (avoids p5 v2 `tint`/`image` incompatibility with HTMLImageElement). Done.
 - [ ] **Phase 11: Port Lines** — Largest tool. Two gradient editors. Animation + video. 65+ settings. WEBGL buffer cleanup.
 - [ ] **Phase 12: Polish** — SVG icons, keyboard shortcuts, responsive canvas, mobile layout, page titles, favicon, deploy.
 
