@@ -4,7 +4,7 @@ const CanvasArea = forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
   ({ children, className, ...props }, ref) => (
     <div
       ref={ref}
-      className={`flex flex-1 items-center justify-center bg-canvas order-1 md:order-none ${className ?? ''}`}
+      className={`flex flex-1 items-center justify-center bg-canvas order-1 md:order-none overflow-hidden [&_canvas]:max-w-full [&_canvas]:max-h-full ${className ?? ''}`}
       {...props}
     >
       {children}
